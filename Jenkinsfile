@@ -4,7 +4,7 @@
     stages {
         stage('Setup') {
             steps {
-	      git credentialsId: 'github-account', url: 'https://github.com/seis665/assignment-11-docker-gesusu.git'
+	      git credentialsId: 'github-account', url: 'https://github.com/gesusu/seis665-practice.git'
   		echo "Copying from  s3 bucket......."
 		sh 'aws s3 cp s3://gbjenkins.com/assignment11/classweb.html  index.html'
             }
