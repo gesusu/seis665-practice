@@ -26,7 +26,7 @@ properties([pipelineTriggers([githubPush()])])
             steps {
                 echo 'Testing....'
 		sh 'docker run -d -p 80:80 --env NGINX_PORT=80 --name classweb1 classweb:1.0'
-		sh 'curl -s 110.120.1.42'
+		sh 'curl -s 10.120.1.42'
 		sh 'docker stop classweb1'
 		sh 'docker rm classweb1'
             }
