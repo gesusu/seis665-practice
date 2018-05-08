@@ -1,6 +1,6 @@
 properties([pipelineTriggers([githubPush()])])
 node('linux'){
-     stages {
+   
         stage('Setup') {
             steps {
 	      git credentialsId: 'github-account', url: 'https://github.com/gesusu/seis665-practice.git'
@@ -24,4 +24,3 @@ node('linux'){
             }
         }
    }
-}
