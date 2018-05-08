@@ -1,7 +1,5 @@
  node['linux']{
-       label'linux'
-   
-    stages {
+     stages {
         stage('Setup') {
             steps {
 	      git credentialsId: 'github-account', url: 'https://github.com/gesusu/seis665-practice.git'
