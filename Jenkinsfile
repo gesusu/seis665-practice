@@ -1,5 +1,5 @@
 properties([pipelineTriggers([githubPush()])])
-node{['linux']
+node('linux'){
      stages {
         stage('Setup') {
             steps {
