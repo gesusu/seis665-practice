@@ -1,29 +1,20 @@
 properties([pipelineTriggers([githubPush()])])
 
 
-  pipeline {   
-  agent {
-     node{
-       label'linux'
-    }
-  }
- 
-    stages {
-        stage('Setup') {
-            steps {
+  
+     node('linux'){
+       
+        step('Setup') {
+          
 	      git credentialsId: 'github-account', url: 'https://github.com/seis665/assignment-11-docker-gesusu.git'
   		echo "Copying from  s3 bucket......."
 		sh 'aws s3 cp s3://gbjenkins.com/assignment11/classweb.html  index.html'
-            }
-        }
-    stage('Build') {
-            steps {
+              }
+    	step('Build') {
                 echo 'Building..'
 		sh 'docker build -t classweb:1.0 .' 
             }
-        }
-    stage('Test') {
-            steps {
+       	step('Test') {
                 echo 'Testing....'
 		sh 'docker run -d -p 80:80 --env NGINX_PORT=80 --name classweb1 classweb:1.0'
 		sh 'curl -s 10.120.1.42'
@@ -31,5 +22,4 @@ properties([pipelineTriggers([githubPush()])])
 		sh 'docker rm classweb1'
             }
         }
-   }
-}
+   
