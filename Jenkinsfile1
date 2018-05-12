@@ -1,4 +1,4 @@
-
+ node('linux'){
 stages {
        stage(‘Test’) {
 	    steps {
@@ -26,5 +26,5 @@ stages {
         }
        }
      }
-   }
- }
+   
+ 
