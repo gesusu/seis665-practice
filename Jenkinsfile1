@@ -1,5 +1,5 @@
- node('linux'){
-stages {
+node('linux'){
+   stages {
        stage(‘Test’) {
 	    steps {
 		git credentialsId: 'github-credential', url: 'https://github.com/gesusu/java-project.git'
@@ -26,5 +26,6 @@ stages {
         }
        }
      }
+    }
    
  
