@@ -1,0 +1,59 @@
+---
+- hosts: all
+  vars:
+    administrator_name: corpadmin
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: upgrade all packages,including  kernel related packages
+    yum:
+     name: '*'
+     state: latest
+  - name: Create  user with password
+    user:
+     name: corpadmin
+     password: Red8t3
+     shell: /bin/bash
+- hosts: web1
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: Install nginx
+    yum:
+      name: nginx
+      state: present
+  - name: Ensure  nginx is started
+    service:
+       name: nginx
+       state: started
+       enabled: yes
+  - name: Copy template to the system directory /etc/nginx/conf.d/default.conf of web1
+    template:
+      src: /home/ec2-user/assignment9/default.conf.j2 
+      dest: /etc/nginx/conf.d/default.conf
+
+- hosts: database1
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: install mysql server
+    yum:
+      name: mysql-server
+      state: present
+  - name: Ensure  mysql-server is started
+    service:
+       name: mysqld
+       state: started
+       enabled: yes
+
+  - name: Creat 5 client directories
+    file: dest=/var/data/client{{ item }}  state=directory
+    with_sequence: start=1 end=5
