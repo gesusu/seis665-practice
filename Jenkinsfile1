@@ -1,7 +1,7 @@
 properties([pipelineTriggers([githubPush()])])
 
 node('linux'){
-       stage(‘Test’) {
+       stage (‘Test’) {
 	    git credentialsId: 'github-credential', url: 'https://github.com/gesusu/seis665-practice.git'
 		sh 'ant -f test.xml -v'
 		junit 'reports/result.xml'
