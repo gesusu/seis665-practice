@@ -2,9 +2,9 @@ node('linux'){
    stages {
        stage(‘Test’) {
 	    steps {
-		git credentialsId: 'github-credential', url: 'https://github.com/gesusu/java-project.git'
+		git credentialsId: 'github-credential', url: 'https://github.com/gesusu/seis665-practice.git'
 		sh 'ant -f test.xml -v'
-		
+		junit 'reports/result.xml'
 	   }
 	  }
  	stage (‘Build’) {
@@ -27,5 +27,6 @@ node('linux'){
        }
      }
     }
+  }
    
  
